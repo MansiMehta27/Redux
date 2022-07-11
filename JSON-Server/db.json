@@ -1,0 +1,53 @@
+{
+  "medisin": [
+    {
+      "id": 1,
+      "name": "dgdfhf",
+      "price": 123,
+      "quantity": 4546,
+      "expiry": 2022
+    },
+    {
+      "id": 2,
+      "name": "dfhgh",
+      "price": 345,
+      "quantity": 35655,
+      "expiry": 2025
+    },
+    {
+      "id": 3,
+      "name": "tytyu",
+      "price": 123,
+      "quantity": 4546,
+      "expiry": 2027
+    },
+    {
+      "id": 4,
+      "name": "ytuytu",
+      "price": 123,
+      "quantity": 45657,
+      "expiry": 2029
+    },
+    {
+      "id": 174,
+      "name": "mansi",
+      "price": "45",
+      "quantity": "221",
+      "expiry": "2020"
+    },
+    {
+      "id": 989,
+      "name": "fgf",
+      "price": "56",
+      "quantity": "76",
+      "expiry": "876"
+    },
+    {
+      "id": 440,
+      "name": "dfdg",
+      "price": "56",
+      "quantity": "89",
+      "expiry": "55"
+    }
+  ]
+}

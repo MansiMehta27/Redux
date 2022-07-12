@@ -56,6 +56,7 @@ function Fmedisin(props) {
         setUid(params.id);
         setOpen(true);
         formik.setValues({
+    
         name:params.name,
         Price:params.Price,
         quantity:params.quantity,

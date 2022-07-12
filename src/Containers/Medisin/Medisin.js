@@ -12,7 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addMedicines, getmedicines } from '../../Redux/Action/medicin.action';
+import { addMedicines, deleteMedicines, getmedicines } from '../../Redux/Action/medicin.action';
 
 function Medisin(props) {
   const [open, setOpen] = useState(false);
@@ -26,7 +26,7 @@ function Medisin(props) {
 
   const medicines = useSelector(state => state.medicines)
 
-  console.log(medicines);
+  console.log(medicines.medicines);
 
 
   const handleClickOpen = () => {
@@ -45,11 +45,14 @@ function Medisin(props) {
   const getdata = () => {
     setdata(medicines.medicines);
   }
-  const handleDelet = (params) => {
-    let localdata1 = JSON.parse(localStorage.getItem("medicine"));
-    let appdata = localdata1.filter((l, i) => l.id !== did);
-    localStorage.setItem("medicine", JSON.stringify(appdata));
-    getdata();
+
+  
+  const handleDelete = () => {
+    // let localdata1 = JSON.parse(localStorage.getItem("medicine"));
+    // let appdata = localdata1.filter((l, i) => l.id !== did);
+    // localStorage.setItem("medicine", JSON.stringify(appdata));
+    // getdata();
+    dispatch(deleteMedicines(did));
     setdid('');
     handleClose('');
   }
@@ -194,7 +197,7 @@ function Medisin(props) {
 
             <DialogActions>
               <Button onClick={handleClose}>no</Button>
-              <Button onClick={handleDelet} autoFocus>
+              <Button onClick={handleDelete} autoFocus>
                 yes
               </Button>
             </DialogActions>

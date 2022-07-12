@@ -134,8 +134,7 @@ function Medisin(props) {
           <Dialog open={open} onClose={handleClose}>
             <DialogTitle>medisin data</DialogTitle>
             <DialogContent>
-
-              <TextField
+            <TextField
                 autoFocus
                 margin="dense"
                 name='name'
@@ -175,9 +174,7 @@ function Medisin(props) {
                 variant="standard"
                 onChange={(e) => setexpiry(e.target.value)}
               />
-
-
-            </DialogContent>
+          </DialogContent>
             <DialogActions>
               <Button onClick={handleClose}>Cancel</Button>
               <Button onClick={handlesubmit}>submit</Button>

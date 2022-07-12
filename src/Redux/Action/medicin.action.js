@@ -63,7 +63,7 @@ export const addMedicines = (data)=>(dispatch)=>{
    
    },2000 )
      
-   }catch(error){
+    }catch(error){
           dispatch(errorMedicine(error.message));
    }
 }

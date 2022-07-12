@@ -26,6 +26,8 @@ function Medisin(props) {
 
   const medicines = useSelector(state => state.medicines)
 
+  console.log(medicines);
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -110,7 +112,7 @@ function Medisin(props) {
   return (
     <>
       {
-        medicines.isLoading ?
+        medicines.isloading ?
         (
           <p>Loading......</p>
         ):(

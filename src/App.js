@@ -6,14 +6,15 @@ import Fmedisin from "./Containers/Medisinformik/Fmedisin";
 import { Provider } from 'react-redux'
 import Counter from "./Redux/Reducer/Counter";
 import { configurstore } from "./Redux/Store";
+import { PersistGate } from 'redux-persist/integration/react'
 
 function App() {
-  const store = configurstore();
+  const {store, persistor} = configurstore();
   return (
   <>
   <Provider store={store}>
 
- 
+  <PersistGate loading={null} persistor={persistor}>
         <Layout>
                         <Switch>
                           <Route exact path={"/medisin"}component={Medisin}/>
@@ -23,6 +24,7 @@ function App() {
                         </Switch>
 
         </Layout>
+        </PersistGate>
    </Provider>
   </>
   );

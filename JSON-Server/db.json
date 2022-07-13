@@ -1,25 +1,18 @@
 {
   "medisin": [
     {
-      "id": 751,
-      "name": "mehta",
-      "price": "562",
-      "quantity": "8792",
-      "expiry": "688"
+      "id": 929,
+      "name": "dfdg",
+      "Price": "7889",
+      "quantity": "76",
+      "expiry": "2020"
     },
     {
-      "id": 717,
-      "name": "mehta",
-      "price": "562",
-      "quantity": "8792",
-      "expiry": "688"
-    },
-    {
-      "id": 157,
-      "name": "mehta",
-      "price": "562",
-      "quantity": "8792",
-      "expiry": "688"
+      "id": 60,
+      "name": "fgf",
+      "Price": "7889",
+      "quantity": "77",
+      "expiry": "8989"
     }
   ]
 }

@@ -95,4 +95,35 @@ export const deleteMedicines=(id)=>(dispatch)=>{
     dispatch(errorMedicine(error.message))
   }
 }
-
+export const upadateMedicins = (data)=>(dispatch)=>{
+  try{
+    dispatch(loadingMedicine());
+    
+     return fetch (base_url + 'medisin/' + data.id,{
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+     .then(response => {
+     if (response.ok) {
+       return response;
+     } else {
+       var error = new Error('Error' + response.status + ': ' + response.statusText);
+       error.response = response;
+       throw error;
+     }
+   },
+   error => {
+     var errmess = new Error(error.message);
+     throw errmess;
+   })
+   .then((response) => response.json())
+   .then(medisine => dispatch(({ type: ActionTypes.POST_MEDICINES, payload: data })))
+   .catch((error)=>dispatch(errorMedicine(error.message)))
+     
+    }catch(error){
+          dispatch(errorMedicine(error.message));
+   }
+}

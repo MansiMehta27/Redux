@@ -31,14 +31,28 @@ export const medicineReducer=(state=initialstate,action)=>{
             return{
                 ...state,
                 isloading:false,
-                medicimes:state.medicines.concat(action.payload),
+                medicines:state.medicines.concat(action.payload),
                 error:''
             }
             case ActionTypes.DELETE_MEDICINES:
             return{
                 ...state,
                 isloading:false,
-                medicimes:state.medicines.filter((d)=>d.id!==action.payload),
+                medicines:state.medicines.filter((d)=>d.id!==action.payload),
+                error:''
+            }
+            case ActionTypes.UPDATE_MEDICINES:
+            return{
+                ...state,
+                isloading:false,
+                medicines:state.medicines.map((l)=>{
+                    if(l.id===action.payload.id){
+                        return action.payload
+                    }
+                    else{
+                         return l
+                    }
+                }),
                 error:''
             }
         default:

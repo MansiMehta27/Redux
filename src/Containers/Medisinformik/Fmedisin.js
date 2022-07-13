@@ -14,7 +14,7 @@ import { Form, Formik, useFormik } from 'formik';
 import EditIcon from '@mui/icons-material/Edit';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { addMedicines, deleteMedicines, getmedicines } from '../../Redux/Action/medicin.action';
+import { addMedicines, deleteMedicines, getmedicines, upadateMedicin, upadateMedicins } from '../../Redux/Action/medicin.action';
 
 function Fmedisin(props) {     
     const [open, setOpen] = useState(false);
@@ -68,7 +68,7 @@ function Fmedisin(props) {
     }
     const handleUpdate=(values)=>{
         console.log(values, uid);
-        // dispatch(upadateMedicine(values))
+        dispatch(upadateMedicins(values))
         // let localData=JSON.parse(localStorage.getItem('medicine'));
         // let vData=localData.map((l)=>{
         //     if(l.id===uid){

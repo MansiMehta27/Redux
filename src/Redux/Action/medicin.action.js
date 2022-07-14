@@ -1,5 +1,6 @@
 import*as ActionTypes from "../ActionTypes";
 import { base_url } from "../../Sharad/baseurl";
+
 export const getmedicines=()=>(dispatch)=>{
     try{
      dispatch(loadingMedicine());
@@ -73,19 +74,19 @@ export const deleteMedicines=(id)=>(dispatch)=>{
     return fetch (base_url + 'medisin/' + id, {
       method: 'DELETE'
      })
- .then(response => {
- if (response.ok) {
-   return response;
- } else {
-   var error = new Error('Error' + response.status + ': ' + response.statusText);
-   error.response = response;
-   throw error;
- }
-},
-error => {
- var errmess = new Error(error.message);
- throw errmess;
-})
+     .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        var error = new Error('Error' + response.status + ': ' + response.statusText);
+        error.response = response;
+        throw error;
+      }
+    },
+    error => {
+      var errmess = new Error(error.message);
+      throw errmess;
+    })
 .then((response) => response.json())
 .then(medisine => dispatch(({ type: ActionTypes.DELETE_MEDICINES, payload: id })))
 .catch((error)=>dispatch(errorMedicine(error.message)))
@@ -94,4 +95,35 @@ error => {
     dispatch(errorMedicine(error.message))
   }
 }
-
+export const upadateMedicins = (data)=>(dispatch)=>{
+  try{
+    dispatch(loadingMedicine());
+    
+     return fetch (base_url + 'medisin/' + data.id,{
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+     .then(response => {
+     if (response.ok) {
+       return response;
+     } else {
+       var error = new Error('Error' + response.status + ': ' + response.statusText);
+       error.response = response;
+       throw error;
+     }
+   },
+   error => {
+     var errmess = new Error(error.message);
+     throw errmess;
+   })
+   .then((response) => response.json())
+   .then(medisine => dispatch(({ type: ActionTypes.UPDATE_MEDICINES, payload: data })))
+   .catch((error)=>dispatch(errorMedicine(error.message)))
+     
+    }catch(error){
+          dispatch(errorMedicine(error.message));
+   }
+}

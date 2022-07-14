@@ -13,8 +13,10 @@ import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
 import EditIcon from '@mui/icons-material/Edit';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { addMedicines, deleteMedicines, getmedicines, upadateMedicins } from '../../Redux/Action/medicin.action';
 
-function Fmedisin(props) {
+function Fmedisin(props) {     
     const [open, setOpen] = useState(false);
     const [dopen, setDOpen] = useState(false);
     const [name, setName] = useState('');
@@ -25,12 +27,11 @@ function Fmedisin(props) {
     const [did, setDid] = useState();
     const [update, setUpdate] = useState(false);
     const [uid, setUid] = useState();
-    const[filterdata,setfilterdata]=useState([]);
+    const [filterdata, setFilterData] = useState([]);
 
     const counter = useSelector(state => state.counter)
-    const medicine = useSelector(state=>state.medicine)
-    // console.log(medicine.isloading);
-
+    const medicines = useSelector (state => state.medicines) 
+      
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -46,17 +47,18 @@ function Fmedisin(props) {
     };
 
     const getData = () => {
-
-        let localData = JSON.parse(localStorage.getItem('medicine'));
-        if (localData !== null) {
-            setData(localData);
-        }
+        // let localData = JSON.parse(localStorage.getItem('medicine'));
+        // console.log(localData);
+        // if (localData !== null) {
+        //     setData(localData);
+        // }
+        setData(medicines.medicines);
     }
     const handleEdit=(params)=>{
         setUid(params.id);
         setOpen(true);
         formik.setValues({
-    
+        id:params.id,
         name:params.name,
         Price:params.Price,
         quantity:params.quantity,
@@ -66,35 +68,39 @@ function Fmedisin(props) {
     }
     const handleUpdate=(values)=>{
         console.log(values, uid);
-        let localData=JSON.parse(localStorage.getItem('medicine'));
-        let vData=localData.map((l)=>{
-            if(l.id===uid){
-                return{id: uid, ...values};
-            }
-            else
-            {
-                return l;
-            }
-        })
-        console.log(vData);
-        localStorage.setItem("medicine", JSON.stringify(vData));
+        dispatch(upadateMedicins(values))
+        // let localData=JSON.parse(localStorage.getItem('medicine'));
+        // let vData=localData.map((l)=>{
+        //     if(l.id===uid){
+        //         return{id: uid, ...values};
+        //     }
+        //     else
+        //     {
+        //         return l;
+        //     }
+        // })
+        // console.log(vData);
+        // localStorage.setItem("medicine", JSON.stringify(vData));
         setOpen(false);
         setUpdate(false);
         setUid();
         getData();
     }
     const handleDelete = () => {
-        let localData1 = JSON.parse(localStorage.getItem("medicine"));
-        let appData = localData1.filter((l, i) => l.id !== did);
-        localStorage.setItem("medicine", JSON.stringify(appData));
-        getData();
+        // let localData1 = JSON.parse(localStorage.getItem("medicine"));
+        // let appData = localData1.filter((l, i) => l.id !== did);
+        // localStorage.setItem("medicine", JSON.stringify(appData));
+        //getData();
+        dispatch(deleteMedicines(did));
         setDid('');
         handleClose('');
 
     }
+    const dispatch = useDispatch();
     useEffect(
         () => {
             getData();
+            dispatch(getmedicines())
         },
         [])
 
@@ -108,16 +114,17 @@ function Fmedisin(props) {
             quantity: values.quantity,
             expiry: values.expiry
         };
+        console.log(data);
+        dispatch(addMedicines(data))
+        // let localData = JSON.parse(localStorage.getItem('medicine'));
 
-        let localData = JSON.parse(localStorage.getItem('medicine'));
-
-        if (localData === null) {
-            localStorage.setItem('medicine', JSON.stringify([data]));
-        }
-        else {
-            localData.push(data);
-            localStorage.setItem('medicine', JSON.stringify(localData));
-        }
+        // if (localData === null) {
+        //     localStorage.setItem('medicine', JSON.stringify([data]));
+        // }
+        // else {
+        //     localData.push(data);
+        //     localStorage.setItem('medicine', JSON.stringify(localData));
+        // }
 
         handleClose();
         setName('');
@@ -151,28 +158,23 @@ function Fmedisin(props) {
                 handleSubmit(values);
             }
             handleClose();
-
         },
     });
 
-   const handleSearch = (val) =>{
+    const handleSearch = (val) => {
         let localData = JSON.parse(localStorage.getItem("medicine"));
-
-        let fdata=localData.filter((l)=>(l.id.toString().includes(val) ||
+        let fData=localData.filter((l)=>(l.id.toString().includes(val) ||
         l.name.toString().toLowerCase().includes(val.toLowerCase()) ||
         l.Price.toString().includes(val)||
         l.quantity.toString().includes(val)||
         l.expiry.toString().includes(val)
-        
         ))
-        setfilterdata(fdata);
-        console.log(fdata);
-        
-   }
-   let finaldata = filterdata.length>0 ? filterdata:data
-    
+        setFilterData(fData);
+        console.log(fData);
+    } 
+    let finaldata = filterdata.length >0 ? filterdata:data
 
- const columns = [
+    const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
         { field: 'name', headerName: 'Name', width: 130 },
         { field: 'Price', headerName: 'Price', width: 130 },
@@ -198,8 +200,17 @@ function Fmedisin(props) {
         }
     ];
 
+
     return (
-        <div>
+        <>
+        {
+            medicines.isloading ?
+            (
+                <p>Loading.....</p>
+            ):(
+                medicines.error !== ''?
+                <p>{medicines.error}</p>:
+                <div>
             <TextField
                 autoFocus
                 margin="dense"
@@ -207,7 +218,7 @@ function Fmedisin(props) {
                 label="Search Medicine"
                 fullWidth
                 variant="standard"
-                onChange={(e)=>handleSearch(e.target.value)}
+                onChange={(e) => handleSearch(e.target.value)}
             />
             <Button variant="outlined" onClick={handleClickOpen}>
                 Add Medicine
@@ -215,7 +226,7 @@ function Fmedisin(props) {
             <p>{counter.counter}</p>
             <div style={{ height: 400, width: '100%' }}>
                 <DataGrid
-                    rows={finaldata}
+                    rows={medicines.medicines}
                     columns={columns}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
@@ -298,7 +309,11 @@ function Fmedisin(props) {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </div>
+            </div>
+            ) 
+        }
+        </>
+        
     );
 }
 

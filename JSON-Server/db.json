@@ -1,24 +1,10 @@
 {
   "medisin": [
     {
-      "id": 751,
-      "name": "mehta",
-      "price": "562",
-      "quantity": "8792",
-      "expiry": "688"
-    },
-    {
-      "id": 717,
-      "name": "mehta",
-      "price": "562",
-      "quantity": "8792",
-      "expiry": "688"
-    },
-    {
       "id": 157,
       "name": "mehta",
-      "price": "562",
-      "quantity": "8792",
+      "Price": "767",
+      "quantity": "8792kh",
       "expiry": "688"
     }
   ]

@@ -2,8 +2,22 @@
   "medisin": [
     {
       "id": 117,
-      "name": "mansi",
+      "name": "mansi561566",
       "Price": "767",
+      "quantity": "77",
+      "expiry": "876"
+    },
+    {
+      "id": 942,
+      "name": "fghfh",
+      "Price": "767",
+      "quantity": "22",
+      "expiry": "2022"
+    },
+    {
+      "id": 118,
+      "name": "mansi561566",
+      "Price": "767fg",
       "quantity": "77",
       "expiry": "876"
     }

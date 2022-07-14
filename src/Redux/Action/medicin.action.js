@@ -100,7 +100,7 @@ export const upadateMedicins = (data)=>(dispatch)=>{
     dispatch(loadingMedicine());
     
      return fetch (base_url + 'medisin/' + data.id,{
-          method: 'POST',
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -120,7 +120,7 @@ export const upadateMedicins = (data)=>(dispatch)=>{
      throw errmess;
    })
    .then((response) => response.json())
-   .then(medisine => dispatch(({ type: ActionTypes.POST_MEDICINES, payload: data })))
+   .then(medisine => dispatch(({ type: ActionTypes.UPDATE_MEDICINES, payload: data })))
    .catch((error)=>dispatch(errorMedicine(error.message)))
      
     }catch(error){

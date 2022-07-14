@@ -14,7 +14,7 @@ import { Form, Formik, useFormik } from 'formik';
 import EditIcon from '@mui/icons-material/Edit';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { addMedicines, deleteMedicines, getmedicines, upadateMedicin, upadateMedicins } from '../../Redux/Action/medicin.action';
+import { addMedicines, deleteMedicines, getmedicines, upadateMedicins } from '../../Redux/Action/medicin.action';
 
 function Fmedisin(props) {     
     const [open, setOpen] = useState(false);

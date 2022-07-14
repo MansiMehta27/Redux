@@ -1,28 +1,29 @@
 import*as ActionTypes from "../ActionTypes";
 import { base_url } from "../../Sharad/baseurl";
-
 export const getmedicines=()=>(dispatch)=>{
     try{
      dispatch(loadingMedicine());
-     setTimeout(function () {
-      return fetch (base_url + 'medisin')
-      .then(response => {
-      if (response.ok) {
-        return response;
-      } else {
-        var error = new Error('Error' + response.status + ': ' + response.statusText);
-        error.response = response;
-        throw error;
-      }
-    },
-    error => {
-      var errmess = new Error(error.message);
-      throw errmess;
-    })
-    .then((response) => response.json())
-    .then(medisine => dispatch(({ type: ActionTypes.GET_MEDISION, payload: medisine })))
-    .catch((error)=>dispatch(errorMedicine(error.message)))
-    },2000)
+     getmedicinesData()
+     .then(data=>console.log(data.data))
+    //  setTimeout(function () {
+    //   return fetch (base_url + 'medisin')
+    //   .then(response => {
+    //   if (response.ok) {
+    //     return response;
+    //   } else {
+    //     var error = new Error('Error' + response.status + ': ' + response.statusText);
+    //     error.response = response;
+    //     throw error;
+    //   }
+    // },
+    // error => {
+    //   var errmess = new Error(error.message);
+    //   throw errmess;
+    // })
+    // .then((response) => response.json())
+    // .then(medisine => dispatch(({ type: ActionTypes.GET_MEDISION, payload: medisine })))
+    // .catch((error)=>dispatch(errorMedicine(error.message)))
+    // },2000)
     }catch(error){
            dispatch(errorMedicine(error.message))
     }
@@ -126,4 +127,4 @@ export const upadateMedicins = (data)=>(dispatch)=>{
     }catch(error){
           dispatch(errorMedicine(error.message));
    }
-}
+} 

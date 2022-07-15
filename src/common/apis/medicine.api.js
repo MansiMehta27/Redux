@@ -1,5 +1,5 @@
-import { getrequest } from "../request"
+import { getRequest } from "../request"
 
-export const getmedicinesData=()=>{
-    return getrequest("medisin")
+export const getMedicinesData=()=>{
+    return getRequest("medisin")
 }

@@ -47,6 +47,7 @@ function Fmedisin(props) {
     };
 
     const getData = () => {
+        
         // let localData = JSON.parse(localStorage.getItem('medicine'));
         // console.log(localData);
         // if (localData !== null) {

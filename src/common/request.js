@@ -22,7 +22,7 @@ export const postRequest=(path, data)=>{
         data:JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json',
-          },
+          }
     });
 }
 export const DeleteRequest=(path,id)=>{
@@ -30,5 +30,15 @@ export const DeleteRequest=(path,id)=>{
         url:path + id,
         method:"DELETE",
 
+    })
+}
+export const putRequest=(path,data)=>{
+    return sendRequest({
+        url:path + data.id,
+        method:"PUT",
+        data:JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+          }
     })
 }

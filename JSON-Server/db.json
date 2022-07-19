@@ -1,17 +1,10 @@
 {
   "medisin": [
     {
-      "id": 155,
-      "name": "dsg",
-      "Price": "767",
-      "quantity": "8792kh",
-      "expiry": "689"
-    },
-    {
       "id": 156,
-      "name": "dgdfg",
-      "Price": "767",
-      "quantity": "8792kh",
+      "name": "dgdfg1",
+      "Price": "7671",
+      "quantity": "8792kh1",
       "expiry": "690"
     },
     {

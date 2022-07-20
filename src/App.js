@@ -6,6 +6,9 @@ import Fmedisin from "./Containers/Medisinformik/Fmedisin";
 import { Provider } from 'react-redux'
 import Counter from "./Redux/Reducer/Counter";
 import { configurstore } from "./Redux/Store";
+import PromiseExample from "./Containers/PromiseExample/PromiseExample";
+
+
 
 function App() {
   const store = configurstore();
@@ -20,6 +23,7 @@ function App() {
                           <Route exact path={"/doctors"}component={Doctors}/>
                           <Route exact path={"/fmedicine"}component={Fmedisin}/>
                           <Route exact path={"/Counter"}component={Counter}/>
+                          <Route exact path={"/Promiseexample"}component={PromiseExample}/>
                         </Switch>
 
         </Layout>

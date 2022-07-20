@@ -95,15 +95,14 @@ function Fmedisin(props) {
         dispatch(deleteMedicines(did));
         setDid('');
         handleClose('');
-
-    }
+ }
     const dispatch = useDispatch();
     useEffect(
         () => {
             getData();
             dispatch(getmedicines())
         },
-        [])
+     [])
 
     let handleSubmit = (values) => {
         console.log(name, Price, quantity, expiry);

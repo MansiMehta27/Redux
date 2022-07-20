@@ -86,7 +86,8 @@ export default function Layout({children}) {
     {label: 'Medicine', icon:<MedicalServicesIcon/>,to:'/medisin'},
     {label: 'Doctor', icon:<PersonIcon/>,to:'/doctors'},
     {label:"Fmedisin",icon:<MedicalServicesIcon/>,to:'/fmedicine'},
-    {label:"Counter",icon:<CountertopsIcon/>,to:'/Counter'}
+    {label:"Counter",icon:<CountertopsIcon/>,to:'/Counter'},
+    {label:"PromiseExample",icon:<MedicalServicesIcon/>,to:'/promiseexample'}
 ]
 
     return (

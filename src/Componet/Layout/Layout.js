@@ -70,7 +70,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function Layout({children}) {
+export default function Layout({ children }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -81,16 +81,17 @@ export default function Layout({children}) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-    
-  const items =[
-    {label: 'Medicine', icon:<MedicalServicesIcon/>,to:'/medisin'},
-    {label: 'Doctor', icon:<PersonIcon/>,to:'/doctors'},
-    {label:"Fmedisin",icon:<MedicalServicesIcon/>,to:'/fmedicine'},
-    {label:"Counter",icon:<CountertopsIcon/>,to:'/Counter'},
-    {label:"PromiseExample",icon:<MedicalServicesIcon/>,to:'/promiseexample'}
-]
 
-    return (
+  const items = [
+    { label: 'Medicine', icon: <MedicalServicesIcon />, to: '/medisin' },
+    { label: 'Doctor', icon: <PersonIcon />, to: '/doctors' },
+    { label: "Fmedisin", icon: <MedicalServicesIcon />, to: '/fmedicine' },
+    { label: "Counter", icon: <CountertopsIcon />, to: '/Counter' },
+    { label: "PromiseExample", icon: <MedicalServicesIcon />, to: '/promiseexample' },
+    { lable: "usehookexample", icon: <PersonIcon />, to: '/usehookexample' }
+  ]
+
+  return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
@@ -130,7 +131,7 @@ export default function Layout({children}) {
         <Divider />
         <List>
           {items.map((l, i) => (
-            <ListItem key={i} component={NavLink} to = {l.to} exact disablePadding sx={{ display: 'block' }}>
+            <ListItem key={i} component={NavLink} to={l.to} exact disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -139,17 +140,17 @@ export default function Layout({children}) {
                 }}
               >
                 <ListItemIcon>
-                    {l.icon}
+                  {l.icon}
                 </ListItemIcon>
-                <ListItemText primary={l.label} sx={{ opacity: open ? 1 : 0 }}/>
+                <ListItemText primary={l.label} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-      <DrawerHeader />
-      {children}
+        <DrawerHeader />
+        {children}
       </Box>
     </Box>
   );

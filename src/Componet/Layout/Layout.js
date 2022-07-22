@@ -88,7 +88,8 @@ export default function Layout({ children }) {
     { label: "Fmedisin", icon: <MedicalServicesIcon />, to: '/fmedicine' },
     { label: "Counter", icon: <CountertopsIcon />, to: '/Counter' },
     { label: "PromiseExample", icon: <MedicalServicesIcon />, to: '/promiseexample' },
-    { lable: "usehookexample", icon: <PersonIcon />, to: '/usehookexample' }
+    { label: "usehookexample", icon: <PersonIcon />, to: '/usehookexample' },
+    { label: "usecallbackexample", icon: <MedicalServicesIcon />, to: '/usecallbackexample' },
   ]
 
   return (

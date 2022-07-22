@@ -8,6 +8,7 @@ import Counter from "./Redux/Reducer/Counter";
 import { configurstore } from "./Redux/Store";
 import PromiseExample from "./Containers/PromiseExample/PromiseExample";
 import UseHookExample from "./Containers/UseHookExample/UseHookExample";
+import UseCallbackExample from "./Containers/UseHookExample/UseCallbackExample";
 
 
 
@@ -26,6 +27,8 @@ function App() {
             <Route exact path={"/Counter"} component={Counter} />
             <Route exact path={"/Promiseexample"} component={PromiseExample} />
             <Route exact path={"/usehookexample"} component={UseHookExample} />
+            <Route exact path={"/usecallbackexample"}component={UseCallbackExample}/>
+            
           </Switch>
 
         </Layout>

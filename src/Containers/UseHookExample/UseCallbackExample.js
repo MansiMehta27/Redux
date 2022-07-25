@@ -20,7 +20,8 @@ function UseCallbackExample(props) {
        <>
         <div style={theme}>
                  <button onClick={()=>setdark(!dark)}>change theme</button>  
-                 <TextField type="text" placeholder='plase enter number' onchange={(e)=>setnumber(parseInt(e.target.value))}/>
+                 <TextField type="text" placeholder='plase enter number' onChange={(e)=>setnumber(parseInt(e.target.value))}/>
+
                  <Listitem getItem={getItem}/>
         </div>
       

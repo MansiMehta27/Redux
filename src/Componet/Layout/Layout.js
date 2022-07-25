@@ -90,6 +90,7 @@ export default function Layout({ children }) {
     { label: "PromiseExample", icon: <MedicalServicesIcon />, to: '/promiseexample' },
     { label: "usehookexample", icon: <PersonIcon />, to: '/usehookexample' },
     { label: "usecallbackexample", icon: <MedicalServicesIcon />, to: '/usecallbackexample' },
+    {label:"contextexample",icon:<PersonIcon />,to:'/contextexample'}
   ]
 
   return (

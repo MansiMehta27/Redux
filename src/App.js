@@ -9,8 +9,7 @@ import { configurstore } from "./Redux/Store";
 import PromiseExample from "./Containers/PromiseExample/PromiseExample";
 import UseHookExample from "./Containers/UseHookExample/UseHookExample";
 import UseCallbackExample from "./Containers/UseHookExample/UseCallbackExample";
-
-
+import UseContextExample from "./Containers/Context/UseContextExample";
 
 function App() {
   const store = configurstore();
@@ -28,6 +27,8 @@ function App() {
             <Route exact path={"/Promiseexample"} component={PromiseExample} />
             <Route exact path={"/usehookexample"} component={UseHookExample} />
             <Route exact path={"/usecallbackexample"}component={UseCallbackExample}/>
+            <Route exact path={"/contextexample"}component={UseContextExample}/>
+
             
           </Switch>
 

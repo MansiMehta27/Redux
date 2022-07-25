@@ -9,7 +9,7 @@ function UseCallbackExample(props) {
      const theme = {
          backgroundColor : dark ? '#fff': '#000',
          color : dark ? '#000' : '#fff'
- }
+    }
  const getItem = useCallback((i)=>{
     console.log("callbackfunction");
         return[i+number, i+number+1, i+number+2];

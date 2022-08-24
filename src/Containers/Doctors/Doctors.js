@@ -12,6 +12,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
 import EditIcon from '@mui/icons-material/Edit';
+import { useDispatch } from 'react-redux';
+import { addDoctors, getdoctors } from '../../Redux/Action/doctor.action';
 
 function Fmedisin(props) {
     const [open, setOpen] = useState(false);
@@ -24,6 +26,8 @@ function Fmedisin(props) {
     const [did, setDid] = useState();
     const [update, setUpdate] = useState(false);
     const [uid, setUid] = useState();
+
+    dispatch = useDispatch()
 
    const handleClickOpen = () => {
         setOpen(true);
@@ -41,7 +45,7 @@ function Fmedisin(props) {
 
     const getData = () => {
 
-        let localData = JSON.parse(localStorage.getItem('medicine'));
+        let localData = JSON.parse(localStorage.getItem('Doctors'));
         if (localData !== null) {
             setData(localData);
         }
@@ -59,7 +63,7 @@ function Fmedisin(props) {
     }
     const handleUpdate=(values)=>{
         console.log(values, uid);
-        let localData=JSON.parse(localStorage.getItem('medicine'));
+        let localData=JSON.parse(localStorage.getItem('Doctors'));
         let vData=localData.map((l)=>{
             if(l.id===uid){
                 return{id: uid, ...values};
@@ -70,16 +74,16 @@ function Fmedisin(props) {
             }
         })
         console.log(vData);
-        localStorage.setItem("medicine", JSON.stringify(vData));
+        localStorage.setItem("Doctors", JSON.stringify(vData));
         setOpen(false);
         setUpdate(false);
         setUid();
         getData();
     }
     const handleDelete = () => {
-        let localData1 = JSON.parse(localStorage.getItem("medicine"));
+        let localData1 = JSON.parse(localStorage.getItem("Doctors"));
         let appData = localData1.filter((l, i) => l.id !== did);
-        localStorage.setItem("medicine", JSON.stringify(appData));
+        localStorage.setItem("Doctors", JSON.stringify(appData));
         getData();
         setDid('');
         handleClose('');
@@ -88,6 +92,7 @@ function Fmedisin(props) {
     useEffect(
         () => {
             getData();
+            dispatch(getdoctors)
         },
         [])
 
@@ -97,20 +102,18 @@ function Fmedisin(props) {
 
         let data = {
             id: Math.floor(Math.random() * 1000),
-            name: values.name,
-            age: values.age,
-            city: values.city,
-            department: values.department
+            ...values
         };
+        dispatch(addDoctors);
 
-        let localData = JSON.parse(localStorage.getItem('medicine'));
+        let localData = JSON.parse(localStorage.getItem('Doctors'));
 
         if (localData === null) {
-            localStorage.setItem('medicine', JSON.stringify([data]));
+            localStorage.setItem('Doctors', JSON.stringify([data]));
         }
         else {
             localData.push(data);
-            localStorage.setItem('medicine', JSON.stringify(localData));
+            localStorage.setItem('Doctors', JSON.stringify(localData));
         }
 
         handleClose();

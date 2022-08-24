@@ -31,7 +31,7 @@ export const doctorsReducer=(state=initialstate,action)=>{
             return{
                 ...state,
                 isloading:false,
-                doctors:state.medicines.concat(action.payload),
+                doctors:state.doctors.concat(action.payload),
                 error:''
             }
             case ActionTypes.DELETE_DOCTORES:

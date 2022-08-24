@@ -5,27 +5,7 @@ import { getDoctorsData, addDoctorsData ,deleteDoctorsData, upadateDoctors} from
 export const getdoctors = () => (dispatch) => {
   try {
     dispatch(loadingDoctors());
-    getDoctorsData()
-      .then(data => dispatch(({ type: ActionTypes.GET_DOCTORES, payload: data.data })))
-    //  setTimeout(function () {
-    //   return fetch (base_url + 'medisin')
-    //   .then(response => {
-    //   if (response.ok) {
-    //     return response;
-    //   } else {
-    //     var error = new Error('Error' + response.status + ': ' + response.statusText);
-    //     error.response = response;
-    //     throw error;
-    //   }
-    // },
-    // error => {
-    //   var errmess = new Error(error.message);
-    //   throw errmess;
-    // })
-    // .then((response) => response.json())
-    // .then(medisine => dispatch(({ type: ActionTypes.GET_MEDISION, payload: medisine })))
-    // .catch((error)=>dispatch(errorMedicine(error.message)))
-    // },2000)
+   
   } catch (error) {
     dispatch(errorDoctors(error.message))
   }
@@ -37,44 +17,17 @@ export const loadingDoctors = () => (dispatch) => {
 export const errorDoctors = (error) => (dispatch) => {
   dispatch({ type: ActionTypes.ERROR_DOCTORES, payload: error });
 }
-export const addDoctors = (data) => (dispatch) => {
+
+
+export const addDoctors = (data) =>async(dispatch) => {
   try {
-    dispatch(loadingMedicine());
+    dispatch(loadingDoctors());
 
-    setTimeout(function(){
-      addDoctorsData(data)
-      .then(data => dispatch(({ type: ActionTypes.POST_DOCTORES, payload: data.data })))
-      .catch((error) => dispatch(errorDoctors(error.message)))
-    }, 2000)
-
-    // setTimeout(function () {
-    //   return fetch(base_url + 'medisin', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(data),
-    //   })
-    //     .then(response => {
-    //       if (response.ok) {
-    //         return response;
-    //       } else {
-    //         var error = new Error('Error' + response.status + ': ' + response.statusText);
-    //         error.response = response;
-    //         throw error;
-    //       }
-    //     },
-    //       error => {
-    //         var errmess = new Error(error.message);
-    //         throw errmess;
-    //       })
-    //     .then((response) => response.json())
-    //     .then(medisine => dispatch(({ type: ActionTypes.POST_MEDICINES, payload: medisine })))
-    //     .catch((error) => dispatch(errorMedicine(error.message)))
-
-    // }, 2000)
-
-  } catch (error) {
+    const docRef = await addDoc(collection(db, "doctors"),data );
+    dispatch({type:ActionTypes.POST_DOCTORES,payload:{id:docRef,...data}})
+    
+      console.log("Document written with ID: ", docRef.id);
+     } catch (error) {
     dispatch(errorDoctors(error.message));
   }
 }

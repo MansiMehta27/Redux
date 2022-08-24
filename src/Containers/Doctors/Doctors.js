@@ -92,6 +92,7 @@ function Fmedisin(props) {
         [])
 
     let handleSubmit = (values) => {
+        
         console.log(name, age, city, department);
 
         let data = {

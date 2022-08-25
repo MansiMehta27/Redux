@@ -17,7 +17,7 @@ export const doctorsReducer=(state=initialstate,action)=>{
         return{
             ...state,
             isloading:false,
-           doctors:action.payload,
+            doctors:action.payload,
             error:''
         }
         case ActionTypes.ERROR_DOCTORES:

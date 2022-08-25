@@ -12,8 +12,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
 import EditIcon from '@mui/icons-material/Edit';
-import { useDispatch } from 'react-redux';
-import { addDoctors, getdoctors } from '../../Redux/Action/doctor.action';
+import { useDispatch, useSelector } from 'react-redux';
+import { addDoctors, deleteDoctors, getdoctors, upadateDoctors } from '../../Redux/Action/doctor.action';
 
 function Fmedisin(props) {
     const [open, setOpen] = useState(false);
@@ -26,8 +26,9 @@ function Fmedisin(props) {
     const [did, setDid] = useState();
     const [update, setUpdate] = useState(false);
     const [uid, setUid] = useState();
+    const Doctors = useSelector (state=>state.doctors)
 
-    dispatch = useDispatch()
+    const dispatch = useDispatch()
 
    const handleClickOpen = () => {
         setOpen(true);
@@ -54,6 +55,7 @@ function Fmedisin(props) {
         setUid(params.id);
         setOpen(true);
         formik.setValues({
+        id:params.id,
         name:params.name,
         age:params.age,
         city:params.city,
@@ -62,28 +64,30 @@ function Fmedisin(props) {
         setUpdate(true);
     }
     const handleUpdate=(values)=>{
-        console.log(values, uid);
-        let localData=JSON.parse(localStorage.getItem('Doctors'));
-        let vData=localData.map((l)=>{
-            if(l.id===uid){
-                return{id: uid, ...values};
-            }
-            else
-            {
-                return l;
-            }
-        })
-        console.log(vData);
-        localStorage.setItem("Doctors", JSON.stringify(vData));
+        // console.log(values, uid);
+        // let localData=JSON.parse(localStorage.getItem('Doctors'));
+        // let vData=localData.map((l)=>{
+        //     if(l.id===uid){
+        //         return{id: uid, ...values};
+        //     }
+        //     else
+        //     {
+        //         return l;
+        //     }
+        // })
+        // console.log(vData);
+        // localStorage.setItem("Doctors", JSON.stringify(vData));
+        dispatch(upadateDoctors(values))
         setOpen(false);
         setUpdate(false);
         setUid();
         getData();
     }
     const handleDelete = () => {
-        let localData1 = JSON.parse(localStorage.getItem("Doctors"));
-        let appData = localData1.filter((l, i) => l.id !== did);
-        localStorage.setItem("Doctors", JSON.stringify(appData));
+     dispatch(deleteDoctors(did))
+        // let localData1 = JSON.parse(localStorage.getItem("Doctors"));
+        // let appData = localData1.filter((l, i) => l.id !== did);
+        // localStorage.setItem("Doctors", JSON.stringify(appData));
         getData();
         setDid('');
         handleClose('');
@@ -92,30 +96,26 @@ function Fmedisin(props) {
     useEffect(
         () => {
             getData();
-            dispatch(getdoctors)
+            dispatch(getdoctors())
         },
         [])
 
     let handleSubmit = (values) => {
-        
-        console.log(name, age, city, department);
-
-        let data = {
-            id: Math.floor(Math.random() * 1000),
-            ...values
-        };
-        dispatch(addDoctors);
+        //         let data = {
+        //     id: Math.floor(Math.random() * 1000),
+        //     ...values
+        // };
+        dispatch(addDoctors(values));
 
         let localData = JSON.parse(localStorage.getItem('Doctors'));
 
-        if (localData === null) {
-            localStorage.setItem('Doctors', JSON.stringify([data]));
-        }
-        else {
-            localData.push(data);
-            localStorage.setItem('Doctors', JSON.stringify(localData));
-        }
-
+        // if (localData === null) {
+        //     localStorage.setItem('Doctors', JSON.stringify([data]));
+        // }
+        // else {
+        //     localData.push(data);
+        //     localStorage.setItem('Doctors', JSON.stringify(localData));
+        // }
         handleClose();
         setName('');
         setAge('');
@@ -151,7 +151,7 @@ function Fmedisin(props) {
         },
     });
 
-    console.log(formik.errors);
+    // console.log(formik.errors);
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
@@ -186,7 +186,7 @@ function Fmedisin(props) {
             </Button>
             <div style={{ height: 400, width: '100%' }}>
                 <DataGrid
-                    rows={data}
+                    rows={Doctors.doctors}
                     columns={columns}
                     pageSize={5}
                     rowsPerPageOptions={[5]}

@@ -129,7 +129,8 @@ function Fmedisin(props) {
         name: yup.string().required('Plese Enter Your Name'),
         age: yup.string().required('Plese Enter Your Age'),
         city: yup.string().required('Plese Enter Your City'),
-        department: yup.string().required('Plese Enter Your Department')
+        department: yup.string().required('Plese Enter Your Department'),
+        file:yup.mixed().required('pls select file')
     });
 
     const formik = useFormik({
@@ -137,7 +138,8 @@ function Fmedisin(props) {
             name: '',
             age: '',
             city: '',
-            department: ''
+            department: '',
+            file:''
         },
         validationSchema: schema,
         onSubmit: values => {
@@ -244,6 +246,14 @@ function Fmedisin(props) {
                                 onChange={formik.handleChange}
                             />
                             {formik.errors.department ? <p>{formik.errors.department}</p> : null}
+                            <input
+                                    type='file'
+                                    name='file'
+                                    id='file'
+                                    onChange={(event)=>formik.setFieldValue("file",event.target.files[0])}
+                            />
+                            {formik.errors.file ? <p>{formik.errors.file}</p> : null}
+
                             <DialogActions>
                                 <Button onClick={handleClose}>Cancel</Button>
                                 <Button type='submit'>Submit</Button>

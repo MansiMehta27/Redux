@@ -14,6 +14,7 @@ import { Form, Formik, useFormik } from 'formik';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDispatch, useSelector } from 'react-redux';
 import { addDoctors, deleteDoctors, getdoctors, upadateDoctors } from '../../Redux/Action/doctor.action';
+import { width } from '@mui/system';
 
 function Fmedisin(props) {
     const [open, setOpen] = useState(false);
@@ -161,6 +162,12 @@ function Fmedisin(props) {
         { field: 'age', headerName: 'Age', width: 130 },
         { field: 'city', headerName: 'City', width: 130 },
         { field: 'department', headerName: 'Department', width: 130 },
+        { field: 'url', headerName: 'img', width: 130,
+        renderCell:(params)=>(
+            <img src = {params.row.url}width={50}height={50}/>
+          )
+        },
+        
         {
             field: 'action',
             headerName: 'Action',
@@ -168,7 +175,7 @@ function Fmedisin(props) {
             renderCell: (params) => {
                 return (
                     <>
-                    <IconButton aria-label="delete" onClick={() => handledClickOpen(params)}>
+                    <IconButton aria-label="delete" onClick={() => {setDid(params.row); handledClickOpen(params)}}>
                         <DeleteIcon />
                     </IconButton>
 

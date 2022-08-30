@@ -4,6 +4,7 @@ import { db, storage } from "../../firebase";
 import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 export const getdoctors = () => async (dispatch) => {
   try {
+
     dispatch(loadingDoctors());
     const querySnapshot = await getDocs(collection(db, "doctors"));
     let data = []
@@ -20,6 +21,7 @@ export const getdoctors = () => async (dispatch) => {
 export const loadingDoctors = () => (dispatch) => {
   dispatch({ type: ActionTypes.LOADING_DOCTORES });
 }
+
 export const errorDoctors = (error) => (dispatch) => {
   dispatch({ type: ActionTypes.ERROR_DOCTORES, payload: error });
 }
@@ -27,6 +29,7 @@ export const addDoctors = (data) => async (dispatch) => {
   try {
     const ramdomedoc = Math.floor(Math.random() * 100000).toString();
     const doctorRef = ref(storage, 'doctors/' + ramdomedoc);
+
     uploadBytes(doctorRef, data.file)
       .then((snapshot) => {
         getDownloadURL(ref(snapshot.ref))
@@ -53,6 +56,7 @@ export const addDoctors = (data) => async (dispatch) => {
             })
           })
       });
+
   console.log(data);
   } catch (error) {
     dispatch(errorDoctors(error.message));
@@ -65,7 +69,7 @@ export const deleteDoctors = (data) => async (dispatch) => {
      deleteObject(doctorRef)
      .then(async() => {
       await deleteDoc(doc(db, "doctors", data.id));
-      dispatch({ type: ActionTypes.DELETE_DOCTORES, payload:data })
+      dispatch({ type: ActionTypes.DELETE_DOCTORES, payload:data.id })
     })
     .catch((error) => {
       dispatch(errorDoctors(error.message))
@@ -73,18 +77,29 @@ export const deleteDoctors = (data) => async (dispatch) => {
   }
   catch (error) {
     dispatch(errorDoctors(error.message))
-  }
+ }
 }
 export const upadateDoctors = (data) => async (dispatch) => {
   try {
-    const doctorRef = doc(db, "doctors", data.id)
-    await updateDoc(doctorRef, {
+    console.log(data);
+
+      if(typeof data.file==='string'){
+      console.log("only img");
+      await updateDoc(doctorRef, {
       name: data.name,
       age: data.age,
       city: data.city,
-      department: data.department
-    });
+      department: data.department,
+      fileName:data.fileName,
+      url:data.url
+   });
     dispatch({ type: ActionTypes.UPDATE_DOCTORES, payload: data })
+    }else{
+          console.log("data with img");
+    }
+  
+   
+
    } catch (error) {
     dispatch(errorDoctors(error.message));
   }

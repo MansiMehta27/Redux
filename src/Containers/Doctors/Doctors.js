@@ -42,7 +42,6 @@ function Fmedisin(props) {
 
     const handledClickOpen = (params) => {
         setDOpen(true);
-        setDid(params.id);
     };
 
     const getData = () => {
@@ -60,7 +59,9 @@ function Fmedisin(props) {
         name:params.name,
         age:params.age,
         city:params.city,
-        department:params.department
+        department:params.department,
+        file:params.url,
+        
         });
         setUpdate(true);
     }
@@ -164,7 +165,7 @@ function Fmedisin(props) {
         { field: 'department', headerName: 'Department', width: 130 },
         { field: 'url', headerName: 'img', width: 130,
         renderCell:(params)=>(
-            <img src = {params.row.url}width={50}height={50}/>
+            <img src = {params.row.url} width={50} height={50}/>
           )
         },
         

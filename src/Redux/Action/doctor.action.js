@@ -29,7 +29,6 @@ export const addDoctors = (data) => async (dispatch) => {
   try {
     const ramdomedoc = Math.floor(Math.random() * 100000).toString();
     const doctorRef = ref(storage, 'doctors/' + ramdomedoc);
-
     uploadBytes(doctorRef, data.file)
       .then((snapshot) => {
         getDownloadURL(ref(snapshot.ref))
@@ -57,7 +56,7 @@ export const addDoctors = (data) => async (dispatch) => {
           })
       });
 
-  console.log(data);
+    console.log(data);
   } catch (error) {
     dispatch(errorDoctors(error.message));
   }
@@ -65,42 +64,68 @@ export const addDoctors = (data) => async (dispatch) => {
 export const deleteDoctors = (data) => async (dispatch) => {
   try {
     console.log(data);
-    const doctorRef = ref(storage, 'doctors/'+ data.fileName);
-     deleteObject(doctorRef)
-     .then(async() => {
-      await deleteDoc(doc(db, "doctors", data.id));
-      dispatch({ type: ActionTypes.DELETE_DOCTORES, payload:data.id })
-    })
-    .catch((error) => {
-      dispatch(errorDoctors(error.message))
-    });
+    const doctorRef = ref(storage, 'doctors/' + data.fileName);
+    deleteObject(doctorRef)
+      .then(async () => {
+        await deleteDoc(doc(db, "doctors", data.id));
+        dispatch({ type: ActionTypes.DELETE_DOCTORES, payload: data.id })
+      })
+      .catch((error) => {
+        dispatch(errorDoctors(error.message))
+      });
   }
   catch (error) {
     dispatch(errorDoctors(error.message))
- }
+
+  }
 }
 export const upadateDoctors = (data) => async (dispatch) => {
+  console.log(data);
   try {
-    console.log(data);
 
-      if(typeof data.file==='string'){
-      console.log("only img");
+    const doctorRef = doc(db, "doctors", data.id);
+    if (typeof data.file === 'string') {
       await updateDoc(doctorRef, {
-      name: data.name,
-      age: data.age,
-      city: data.city,
-      department: data.department,
-      fileName:data.fileName,
-      url:data.url
-   });
-    dispatch({ type: ActionTypes.UPDATE_DOCTORES, payload: data })
-    }else{
-          console.log("data with img");
+        name: data.name,
+        age: data.age,
+        city: data.city,
+        department: data.department,
+        fileName: data.fileName,
+        url: data.url
+      });
+      dispatch({ type: ActionTypes.UPDATE_DOCTORES, payload: data })
+    } else {  
+      const docRef = ref(storage, 'doctors/' + data.fileName);
+      deleteObject(docRef)
+        .then(
+          async () => {
+            const ramdomedoc = Math.floor(Math.random() * 100000).toString();
+            const doctorRefint = ref(storage, 'doctors/' + ramdomedoc);
+            uploadBytes(doctorRefint, data.file)
+              .then((snapshot) => {
+                getDownloadURL(snapshot.ref)
+                  .then(async (url) => {
+                    await updateDoc(doctorRef, {
+                      name: data.name,
+                      age: data.age,
+                      city: data.city,
+                      department: data.department,
+                      fileName: ramdomedoc,
+                      url: url
+                    });
+                    dispatch({
+                      type: ActionTypes.UPDATE_DOCTORES,
+                      payload: {
+                        ...data,
+                        url:url,
+                        fileName: ramdomedoc
+                      }
+                    })
+                  })
+              });
+          })
     }
-  
-   
-
-   } catch (error) {
+  } catch (error) {
     dispatch(errorDoctors(error.message));
   }
 }

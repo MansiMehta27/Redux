@@ -52,6 +52,7 @@ function Fmedisin(props) {
         }
     }
     const handleEdit=(params)=>{
+        console.log(params);
         setUid(params.id);
         setOpen(true);
         formik.setValues({
@@ -61,11 +62,12 @@ function Fmedisin(props) {
         city:params.city,
         department:params.department,
         file:params.url,
-        
+        ...params
         });
         setUpdate(true);
     }
     const handleUpdate=(values)=>{
+        
         // console.log(values, uid);
         // let localData=JSON.parse(localStorage.getItem('Doctors'));
         // let vData=localData.map((l)=>{

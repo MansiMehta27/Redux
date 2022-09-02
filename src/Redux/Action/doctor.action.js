@@ -95,7 +95,7 @@ export const upadateDoctors = (data) => async (dispatch) => {
       });
       dispatch({ type: ActionTypes.UPDATE_DOCTORES, payload: data })
     } else {  
-      const docRef = ref(storage, 'doctors/' + data.fileName);
+    const docRef = ref(storage, 'doctors/' + data.fileName);
       deleteObject(docRef)
         .then(
           async () => {

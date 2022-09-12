@@ -10,8 +10,6 @@ import PromiseExample from "./Containers/PromiseExample/PromiseExample";
 import UseHookExample from "./Containers/UseHookExample/UseHookExample";
 import UseCallbackExample from "./Containers/UseHookExample/UseCallbackExample";
 
-
-
 function App() {
   const store = configurstore();
   return (

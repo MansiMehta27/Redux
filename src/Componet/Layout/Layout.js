@@ -16,13 +16,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import { Icon } from '@mui/material';
-import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import PersonIcon from '@mui/icons-material/Person';
 import { NavLink } from 'react-router-dom';
-import CountertopsIcon from '@mui/icons-material/Countertops';
 
 const drawerWidth = 240;
 
@@ -83,13 +78,9 @@ export default function Layout({ children }) {
   };
 
   const items = [
-    { label: 'Medicine', icon: <MedicalServicesIcon />, to: '/medisin' },
-    { label: 'Doctor', icon: <PersonIcon />, to: '/doctors' },
-    { label: "Fmedisin", icon: <MedicalServicesIcon />, to: '/fmedicine' },
-    { label: "Counter", icon: <CountertopsIcon />, to: '/Counter' },
-    { label: "PromiseExample", icon: <MedicalServicesIcon />, to: '/promiseexample' },
-    { label: "usehookexample", icon: <PersonIcon />, to: '/usehookexample' },
-    { label: "usecallbackexample", icon: <MedicalServicesIcon />, to: '/usecallbackexample' },
+   
+    { label: 'Category', icon: <PersonIcon />, to: '/category' },
+    
   ]
 
   return (
@@ -107,7 +98,7 @@ export default function Layout({ children }) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Persistent drawer
+               Category Model
           </Typography>
         </Toolbar>
       </AppBar>

@@ -1,51 +1,51 @@
 import * as ActionTypes  from "../ActionTypes"
 const initialstate={
     isloading:false,
-    medicines:[],
+    category:[],
     error:''
 }
-export const medicineReducer=(state=initialstate,action)=>{
-    // console.log(action.type, action.payload,state);
+export const categoryReducer=(state=initialstate,action)=>{
+    console.log(action.type, action.payload,state);
     switch(action.type){
-        case ActionTypes.LOADING_MEDICINES:
+        case ActionTypes.LOADING_CATEGORY:
         return{
             ...state,
             isloading:true,
             error:''
         }
-        case ActionTypes.GET_MEDISION:
+        case ActionTypes.GET_CATEGORY:
         return{
             ...state,
             isloading:false,
-            medicines:action.payload,
+            category:action.payload,
             error:''
         }
-        case ActionTypes.ERROR_MEDICINES:
+        case ActionTypes.ERROR_CATEGORY:
         return{
             ...state,
             isloading:false,
-            medicines:[],
+            category:[],
             error:action.payload
         }
-        case ActionTypes.POST_MEDICINES:
+        case ActionTypes.POST_CATEGORY:
             return{
                 ...state,
                 isloading:false,
-                medicines:state.medicines.concat(action.payload),
+                category:state.category.concat(action.payload),
                 error:''
             }
-            case ActionTypes.DELETE_MEDICINES:
+            case ActionTypes.DELETE_CATEGORY:
             return{
                 ...state,
                 isloading:false,
-                medicines:state.medicines.filter((d)=>d.id!==action.payload),
+                category:state.category.filter((d)=>d.id!==action.payload),
                 error:''
             }
-            case ActionTypes.UPDATE_MEDICINES:
+            case ActionTypes.UPDATE_CATEGORY:
             return{
                 ...state,
                 isloading:false,
-                medicines:state.medicines.map((l)=>{
+                category:state.category.map((l)=>{
                     if(l.id===action.payload.id){
                         return action.payload
                     }

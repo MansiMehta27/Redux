@@ -3,6 +3,7 @@ import Layout from "./Componet/Layout/Layout";
 import Category from "./Containers/Category/Category";
 import { Provider } from 'react-redux'
 import { configurstore } from "./Redux/Store";
+import Product from "./Containers/Product/Product";
 function App() {
   const store = configurstore();
   return (
@@ -12,15 +13,15 @@ function App() {
 
         <Layout>
           <Switch>
-          
+
             <Route exact path={"/category"} component={Category} />
-          
-            
+            <Route exact path={"/product"} component={Product} />
+
           </Switch>
 
         </Layout>
       </Provider>
-      
+
     </>
   );
 }

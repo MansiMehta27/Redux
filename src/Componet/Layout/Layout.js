@@ -80,6 +80,7 @@ export default function Layout({ children }) {
   const items = [
    
     { label: 'Category', icon: <PersonIcon />, to: '/category' },
+    { label: 'Product', icon: <PersonIcon />, to: '/product' },
     
   ]
 
@@ -98,9 +99,31 @@ export default function Layout({ children }) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-               Category Model
+               Model
           </Typography>
+         
         </Toolbar>
+
+
+ </AppBar>
+      <AppBar position="fixed" open={open}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
+               Model
+          </Typography>
+         
+        </Toolbar>
+    
+
       </AppBar>
       <Drawer
         sx={{

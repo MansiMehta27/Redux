@@ -2,6 +2,7 @@ import * as ActionTypes from "../ActionTypes";
 import { collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase";
 import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { Category } from "@mui/icons-material";
 export const getcategory = () => async (dispatch) => {
   try {
 
@@ -59,7 +60,7 @@ export const deleteCategory = (data) => async (dispatch) => {
   try {
     console.log(data);
     const categoryRef = ref(storage, 'category/' + data.fileName);
-    deleteObject(category)
+    deleteObject(Category)
       .then(async () => {
         await deleteDoc(doc(db, "category", data.id));
         dispatch({ type: ActionTypes.DELETE_CATEGORY, payload: data.id })

@@ -38,6 +38,7 @@ export const addProduct = (data) => async (dispatch) => {
                             name: data.name,
                             price: data.price,
                             discripation: data.discripation,
+                            category_id:data.category_id,
                             url: url,
                             fileName: ramdomedoc
                         });
@@ -48,6 +49,7 @@ export const addProduct = (data) => async (dispatch) => {
                                 name: data.name,
                                 price: data.price,
                                 discripation: data.discripation,
+                                category_id:data.category_id,
                                 url: url,
                                 fileName: ramdomedoc
                             }
@@ -88,6 +90,7 @@ export const upadateProduct = (data) => async (dispatch) => {
                 name: data.name,
                 price: data.price,
                 discripation: data.discripation,
+                category_id:data.category_id,
                 fileName: data.fileName,
                 url: data.url
             });
@@ -107,6 +110,7 @@ export const upadateProduct = (data) => async (dispatch) => {
                                             name: data.name,
                                             price: data.price,
                                             discripation: data.discripation,
+                                            category_id:data.category_id,
                                             fileName: ramdomedoc,
                                             url: url
                                         });
@@ -116,6 +120,7 @@ export const upadateProduct = (data) => async (dispatch) => {
                                                 ...data,
                                                 price: data.price,
                                                 discripation: data.discripation,
+                                                category_id:data.category_id,
                                                 url: url,
                                                 fileName: ramdomedoc
                                             }

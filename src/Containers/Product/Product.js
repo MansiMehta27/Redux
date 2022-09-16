@@ -13,9 +13,15 @@ import { Form, Formik, useFormik } from 'formik';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, deleteProduct, getproduct, upadateProduct } from '../../Redux/Action/product.action';
-
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { MenuItem } from '@mui/material';
+import { getcategory } from '../../Redux/Action/category.action';
 
 function Product(props) {
+    
     const [open, setOpen] = useState(false);
     const [dopen, setDOpen] = useState(false);
     const [name, setName] = useState('');
@@ -23,7 +29,8 @@ function Product(props) {
     const [did, setDid] = useState();
     const [update, setUpdate] = useState(false);
     const [uid, setUid] = useState();
-    const Product = useSelector(state => state.product)
+    const Product = useSelector(state => state.product);
+    const Category = useSelector(state => state.category)
 
     const dispatch = useDispatch()
 
@@ -54,8 +61,8 @@ function Product(props) {
         formik.setValues({
             id: params.id,
             name: params.name,
-            price:params.price,
-            discripation:params.discripation,
+            price: params.price,
+            discripation: params.discripation,
             file: params.url,
             ...params
         });
@@ -81,6 +88,8 @@ function Product(props) {
         () => {
             getData();
             dispatch(getproduct())
+            dispatch(getcategory())
+
         },
         [])
 
@@ -101,12 +110,18 @@ function Product(props) {
         name: yup.string().required('Plese Enter Your Name'),
         price: yup.string().required('Plese Enter Your Price'),
         discripation: yup.string().required('Plese Enter Your Discripation'),
-        file: yup.mixed().required('pls select File')
+        file: yup.mixed().required('pls select File'),
+        category_id:yup.string().required('Plese Enter Your category_id')
+
+        
     });
 
     const formik = useFormik({
         initialValues: {
             name: '',
+            price:'',
+            discripation:"",
+            category_id: '',
             file: ''
         },
         validationSchema: schema,
@@ -121,13 +136,12 @@ function Product(props) {
         },
     });
 
-    // console.log(formik.errors);
-
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
         { field: 'name', headerName: 'Name', width: 130 },
         { field: 'price', headerName: 'Price', width: 130 },
         { field: 'discripation', headerName: 'Discripation', width: 130 },
+        
         {
             field: 'url', headerName: 'img', width: 130,
             renderCell: (params) => (
@@ -210,6 +224,35 @@ function Product(props) {
                                 onChange={formik.handleChange}
                             />
                             {formik.errors.discripation ? <p>{formik.errors.discripation}</p> : null}
+
+                           
+
+                            <Box sx={{ minWidth: 120 }}>
+                                <FormControl fullWidth>
+                                    <InputLabel id="demo-simple-select-label">product</InputLabel>
+                                    <Select
+                                        name='category_id'
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={formik.values.Product_list}
+                                        label="product"
+                                        onChange={formik.handleChange}
+                                 >
+                               {
+                                       Category.category.map((a)=>{
+
+                                            return(
+                                            <MenuItem value={a.id}>{a.name}</ MenuItem>
+                                            )
+                                               
+                                            
+                                       }) 
+                              }
+                                        
+                                    </Select>
+                                </FormControl>
+                            </Box>
+
 
                             <input
                                 type='file'

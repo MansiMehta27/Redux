@@ -60,7 +60,7 @@ export const deleteCategory = (data) => async (dispatch) => {
   try {
     console.log(data);
     const categoryRef = ref(storage, 'category/' + data.fileName);
-    deleteObject(Category)
+    deleteObject(categoryRef)
       .then(async () => {
         await deleteDoc(doc(db, "category", data.id));
         dispatch({ type: ActionTypes.DELETE_CATEGORY, payload: data.id })
